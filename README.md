@@ -37,14 +37,20 @@ The first fields are:
  
 Card number as hex ASCII encoded. 
 
-To obtain full card number as 
+To obtain full 20 digit card number as 
 printed on the back side:
+* read 13 char and discard the first;
 * add fixed prefix (`8038000`) in front of 
-what you read in this field;
+what you read;
 * calculate luhn checksum of 
 all the previous (prefix + number read);
 * add checksum as last char. [1]
   
+## Try it with ruby
+
+    bundle install
+    # -d is just for debug
+    bundle exec ruby -d tessera_sanitaria.rb  
   
 [1] https://sistemats1.sanita.finanze.it/portale/documents/20182/34254/allegato%2Btecnico%2BTS-CNS%2Bex%2BDL%2B78-2010_v22-06-12.pdf/2ef2b969-879c-64f5-2b0a-8bce9877c08f
 
