@@ -21,16 +21,16 @@ The payload is divided into fields. Before each field there are two bytes
   
 The first fields are: 
 - issuer 
-- date of issue 
-- expiration's date 
+- date of issue  as DDMMYYYY
+- expiration's date  as DDMMYYYY
 - surname
 - name
-- date of birth
-- sex
+- date of birth as DDMMYYYY
+- sex (F or M)
 - heigth (should be empty) 
 - Italian taxpayer number (codice fiscale)
 - city of issue
-- city of residence
+- city of residence as ISTAT code;
 - street of residence;
 
 ## DF0/EF_ID_Carta
