@@ -35,9 +35,15 @@ The first fields are:
 
 ## DF0/EF_ID_Carta
  
-Card number as hex ASCII encoded. To obtain full card number as 
-printed on the back side, add fixed prefix (`8038000`) and luhn checksum of 
-all the previous (prefix + card number) as last char [1].
+Card number as hex ASCII encoded. 
+
+To obtain full card number as 
+printed on the back side:
+* add fixed prefix (`8038000`) in front of 
+what you read in this field;
+* calculate luhn checksum of 
+all the previous (prefix + number read);
+* add checksum as last char. [1]
   
   
 [1] https://sistemats1.sanita.finanze.it/portale/documents/20182/34254/allegato%2Btecnico%2BTS-CNS%2Bex%2BDL%2B78-2010_v22-06-12.pdf/2ef2b969-879c-64f5-2b0a-8bce9877c08f
