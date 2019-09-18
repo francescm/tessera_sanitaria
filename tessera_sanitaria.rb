@@ -12,6 +12,7 @@ EF_DATI_PERSONALI = %w{11 00 11 02} # array of string; strings should be read as
 CARD_ID_HEADER = "8038000"
 
 TIMEOUT = 0.5
+OK_RESPONSE_CODE = "9000"
 
 def pack_apdu(apdu)
   apdu.pack('H2'*apdu.size)
@@ -41,19 +42,23 @@ card = Smartcard::PCSC::Card.new(context, reader)
 
 puts card_status = card.info
 
-while ( res = ( card.transmit(compose_select_apdu(EF_DATI_PERSONALI))).unpack('H*') ) != ["9000"]
+while ( res = ( card.transmit(compose_select_apdu(EF_DATI_PERSONALI))).unpack('H*') ) != [ OK_RESPONSE_CODE ]
   puts "change dir res: #{res}" if $DEBUG
   sleep TIMEOUT
 end
-while ( raw_length = card.transmit(compose_read_apdu(EF_DATI_PERSONALI_LENGTH)).unpack('H*').first ) !~ /9000$/
+while ( raw_length = card.transmit(compose_read_apdu(EF_DATI_PERSONALI_LENGTH)).unpack('H*').first ) !~ /#{OK_RESPONSE_CODE}$/
   puts "ask for raw_length res: #{raw_length}" if $DEBUG
   sleep TIMEOUT
 end
 
-puts "raw_length: #{raw_length}"
-puts (raw_length[0..(EF_DATI_PERSONALI_LENGTH * 2)].scan /../).map {|c| c.to_i(16).chr}.join
+puts "EF_Dati_Personali raw_length: #{raw_length}" if $DEBUG
+ef_dati_personali_payload_length = (raw_length[0..(EF_DATI_PERSONALI_LENGTH * 2)].scan /../).map {|c| c.to_i(16).chr}.join.to_i(16)
 
-
+while ( raw_payload = card.transmit(compose_read_apdu(ef_dati_personali_payload_length)).unpack('H*').first ) !~ /#{OK_RESPONSE_CODE}$/
+  puts "ask for raw_length res: #{raw_length}" if $DEBUG
+  sleep TIMEOUT
+end
+puts raw_payload if $DEBUG
 
 
 # Disconnect
