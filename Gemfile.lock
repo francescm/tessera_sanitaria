@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    luhn (1.0.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  luhn
+
+BUNDLED WITH
+   1.17.2
