@@ -1,13 +1,24 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    ffi (1.11.1)
     luhn (1.0.2)
+    rubyzip (1.2.4)
+    smartcard (0.5.6)
+      ffi (>= 1.2.0)
+      rubyzip (>= 0.9.9)
+      zerg_support (>= 0.1.6)
+      zip-zip (>= 0.3)
+    zerg_support (0.1.6)
+    zip-zip (0.3)
+      rubyzip (>= 1.0.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   luhn
+  smartcard
 
 BUNDLED WITH
    1.17.2
