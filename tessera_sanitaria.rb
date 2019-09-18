@@ -57,7 +57,9 @@ def do_parse(data, result, index)
 end
 
 def card_id(raw_data)
-  card_stem = "#{CARD_ID_HEADER}#{ascii_convert(raw_data[2...-4])}" # trim last four bytes because it's reponse code
+  # trim last four bytes because it's reponse code
+  # discard first char == two bytes (why? I don't know)
+  card_stem = "#{CARD_ID_HEADER}#{ascii_convert(raw_data[2...-4])}"
   control_digit = Luhn.control_digit(card_stem)
   "#{card_stem}#{control_digit}"
 end
