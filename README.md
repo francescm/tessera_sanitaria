@@ -1,8 +1,14 @@
 # Tessera sanitaria
 
-The Italian health insurance card (tessera sanitaria) [1] since some time sports a RFID/Calypso-like interface to access cardholder's data.
+The Italian health insurance card (tessera sanitaria) [1] since some 
+time sports a RFID/Calypso-like interface to access cardholder's data.
 
 I tried ACR122U NFC reader with CCID [2] library on Debian GNU/Linux. 
+
+The same content is exposed through the traditional smart card 
+interface. The test script issues the same results reading the 
+tessera sanitaria in a ACS ACR38 reader (on Debian the libacsccid1 pkg 
+is needed). 
 
 To make sense of the content, you need the filesystem specs from agid [3].
 
